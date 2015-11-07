@@ -7,7 +7,6 @@ var Instruction = React.createClass({
     return (
       <div className="instruction">
         <p>Describe youself in four words, phrases or short descriptions.</p>
-        <button onClick={this.props.generateMemes}>Mememe</button>
       </div>
     )
 

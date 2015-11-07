@@ -3,6 +3,7 @@ import Container from './Container';
 import Share from './Share';
 
 import React from 'react';
+import request from 'superagent';
 
 var Mememe = React.createClass({
 
@@ -15,13 +16,27 @@ var Mememe = React.createClass({
   },
 
   generateMemes (descriptions){
-    console.log('generating meme');
+    for(var key in descriptions) {
+      var VALUE = descriptions[key];
+
+      var YOUR_API_KEY = "xxx";
+      var YOUR_CSE_ID = "yyy";
 
 
-    var descriptions = ["coder", "runner", "chocolate lover", "taylor swift fan"];
+      var searchQuery = `https://www.googleapis.com/customsearch/v1?key=${YOUR_API_KEY}&cx=${YOUR_CSE_ID}&q=${VALUE}&searchType=image&fileType=jpg&imgSize=small&alt=json`
+
+      request
+        .get(searchQuery)
+        .end((err, results) => {
+          debugger
+        })
 
 
-    var memeGenerated = true;
+      debugger
+    }
+
+
+    var memesGenerated = true;
     this.setState({memesGenerated: memesGenerated});
   },
 
@@ -31,10 +46,10 @@ var Mememe = React.createClass({
 
     return (
       <div className="mememe">
-        <Instruction
-          generateMemes={generateMemes}/>
+        <Instruction/>
         <Container
-          memesGenerated={memesGenerated}/>
+          memesGenerated={memesGenerated}
+          generateMemes={generateMemes}/>
         <Share/>
       </div>
     )
